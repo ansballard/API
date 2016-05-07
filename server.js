@@ -1,6 +1,1 @@
-(function() {
-  "use strict";
-
-  require("./dist/app.js");
-
-})();
+require("./dist/server/app.js");

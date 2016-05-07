@@ -1,5 +1,30 @@
 # Changelog
 
+## 1.1.0 (5/7/2016)
+
+**Implemented Enhancements**
+
+- Replace gulp with custom build scripts
+  - custom watch with ora
+  - clean stop on keypress
+  - rollup
+  - transpile build script for old node
+- refactor source to es6
+  - const/let
+  - arrow functions
+  - es6 modules
+  - concat to single output file
+- Express Changes
+  - consistent method use
+    - sendStatus, end(msg),
+  - eslint passing
+
+**Bugs**
+
+- need to replace `bcrypt-nodejs`, monkeypatched for now
+- changed `auth/:username/remove` to `api/user/:username/delete`
+  - original didn't work, works now, tested with cli
+
 ## 1.0.2 ()
 
 **Implemented Enhancements**
