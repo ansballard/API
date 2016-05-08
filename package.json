@@ -48,5 +48,5 @@
   },
   "bundleDependencies": [],
   "private": true,
-  "main": "app.min.js"
+  "main": "server.js"
 }
