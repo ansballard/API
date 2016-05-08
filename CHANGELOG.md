@@ -6,6 +6,7 @@
 
 - split routes.js into the routes folder
 - package.json engine is now the openshift version
+- add /health for new node
 
 **Bugs**
 
