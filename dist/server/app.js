@@ -61,7 +61,6 @@ var configDB = void 0;
 if (process.env.OPENSHIFT_NODEJS_PORT || process.env.OPENSHIFT_NODEJS_IP) {
   configDB = _db2.default.getNewLive(process.env.DBUSERNAME, process.env.DBPASSWORD);
 } else {
-  // configDB = db.getNewLive(process.env.DBUSERNAME, process.env.DBPASSWORD);
   configDB = _db2.default.getLocal(null, null);
 }
 

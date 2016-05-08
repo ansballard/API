@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.1.1 (5/8/2016)
+
+**Implemented Enhancements**
+
+- split routes.js into the routes folder
+- package.json engine is now the openshift version
+
+**Bugs**
+
+- none
+
 ## 1.1.0 (5/7/2016)
 
 **Implemented Enhancements**
