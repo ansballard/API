@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.2 (5/8/2016)
+
+**Implemented Enhancements**
+
+- none
+
+**Bugs**
+
+- upload failure wasn't showing
+
 ## 1.1.1 (5/8/2016)
 
 **Implemented Enhancements**
