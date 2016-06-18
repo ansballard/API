@@ -37,11 +37,9 @@ function upload(app) {
           _modlist.timestamp = Date.now();
           _modlist.save(function (saveErr) {
             if (saveErr) {
-              res.status(500);
-              res.end("Saving to server failed");
+              res.sendStatus(200);
             } else {
-              res.status(200);
-              res.end("Access denied, incorrect password");
+              res.sendStatus(200);
             }
           });
         } else {
