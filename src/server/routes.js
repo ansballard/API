@@ -23,6 +23,10 @@ function routes(app, jwt, scriptVersion) {
 	script(app, scriptVersion);
 	search(app);
 
+	app.get("/health", (req, res) => {
+		res.sendStatus(200);
+	});
+
   app.post("/api/newTag/:username", tokenEnsureAuthorized, (req, res) => {
 		jwt.verify(req.token, process.env.JWTSECRET, (err, decoded) => {
 			if(err) {
