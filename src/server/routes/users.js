@@ -16,7 +16,8 @@ export default function users(app) {
     });
   });
   app.get("/api/users/list", (req, res) => {
-    Modlist.find({}, {username: 1, timestamp: 1, score: 1}, (err, _mods) => {
+    Modlist.find({}, {username: 1, timestamp: 1, score: 1})
+    .exec((err, _mods) => {
       if(err) {
         res.sendStatus(500);
       } else {
@@ -28,5 +29,26 @@ export default function users(app) {
         res.json(mods);
       }
     });
+  });
+  app.get("/api/users/list/:limit", (req, res) => {
+    if(!req.params.limit > 0) {
+      res.sendStatus(400);
+    } else {
+      Modlist.find({}, {username: 1, timestamp: 1, score: 1})
+      .sort({"timestamp": -1})
+      .limit(req.params.limit)
+      .exec((err, _mods) => {
+        if(err) {
+          res.sendStatus(500);
+        } else {
+          const mods = [];
+          for(let i = _mods.length - 1, j = 0; i >= 0; i--, j++) {
+            mods[j] = {"username": _mods[i].username, "score": _mods[i].score, "timestamp": _mods[i].timestamp};
+          }
+          res.set("Content-Type", "application/json");
+          res.json(mods);
+        }
+      });
+    }
   });
 }

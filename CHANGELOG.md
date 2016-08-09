@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.2.0 (8/8/2016)
+
+**Implemented Enhancements**
+
+- added a users list route with a limit param
+- added a user list search route
+
+**Bugs**
+
+- search files now uses actual mongo queries (20x faster)
+
 ## 1.1.2 (5/8/2016)
 
 **Implemented Enhancements**
