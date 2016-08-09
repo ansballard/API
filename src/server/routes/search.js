@@ -13,7 +13,7 @@ export default function search(app) {
 				if(err) {
 					res.sendStatus(500);
 				} else {
-          res.json({users: users.map(u => u.username), length: users.length});
+          res.json({users: users.map(u => u.username), length: users.length, newUsers: users.map(u => ({username: u.username, timestamp: u.timestamp, score: u.score}))});
 				}
 			});
 		} else {

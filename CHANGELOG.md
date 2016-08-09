@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.2.1 (8/8/2016)
+
+**Implemented Enhancements**
+
+- none
+
+**Bugs**
+
+- added newUsers in file search so I can move it to the userlist view
+
 ## 1.2.0 (8/8/2016)
 
 **Implemented Enhancements**

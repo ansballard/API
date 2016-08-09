@@ -24,7 +24,9 @@ function search(app) {
         } else {
           res.json({ users: users.map(function (u) {
               return u.username;
-            }), length: users.length });
+            }), length: users.length, newUsers: users.map(function (u) {
+              return { username: u.username, timestamp: u.timestamp, score: u.score };
+            }) });
         }
       });
     } else {
