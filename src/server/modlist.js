@@ -36,7 +36,11 @@ modlistSchema.methods.generateHash = function(_password) {
 };
 
 modlistSchema.methods.validPassword = function(_password) {
-	return bcrypt.compareSync(_password, this.password);
+	try {
+		return bcrypt.compareSync(_password, this.password);
+	} catch (e) {
+		return false;
+	}
 };
 
 modlistSchema.methods.shrinkArrays = function shrinkArrays() {

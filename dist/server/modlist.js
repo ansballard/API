@@ -47,7 +47,11 @@ modlistSchema.methods.generateHash = function (_password) {
 };
 
 modlistSchema.methods.validPassword = function (_password) {
-	return _bcryptNodejs2.default.compareSync(_password, this.password);
+	try {
+		return _bcryptNodejs2.default.compareSync(_password, this.password);
+	} catch (e) {
+		return false;
+	}
 };
 
 modlistSchema.methods.shrinkArrays = function shrinkArrays() {

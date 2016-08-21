@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.3.0 (8/21/2016)
+
+**Implemented Enhancements**
+
+- added changepass route
+
+**Bugs**
+
+- fixed some unsanitized routes (injection issues)
+- catch some exceptions when passwords aren't valid
+
 ## 1.2.1 (8/8/2016)
 
 **Implemented Enhancements**
