@@ -39,11 +39,12 @@ function users(app) {
     });
   });
   app.get("/api/users/list/:limit", function (req, res) {
-    if (!req.params.limit > 0) {
+    if (! +req.params.limit > 0) {
       res.sendStatus(400);
     } else {
-      _modlist2.default.find({}, { username: 1, timestamp: 1, score: 1 }).sort({ "timestamp": -1 }).limit(req.params.limit).exec(function (err, _mods) {
+      _modlist2.default.find({}, { username: 1, timestamp: 1, score: 1 }).sort({ "timestamp": -1 }).limit(+req.params.limit).exec(function (err, _mods) {
         if (err) {
+          console.log(err);
           res.sendStatus(500);
         } else {
           var mods = [];

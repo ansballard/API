@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.3.1 (9/28/2016)
+
+**Implemented Enhancements**
+
+- none
+
+**Bugs**
+
+- fixed limited users list route, had to cast to int
+
 ## 1.3.0 (8/21/2016)
 
 **Implemented Enhancements**

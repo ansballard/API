@@ -58,11 +58,11 @@ var app = (0, _express2.default)();
 
 var configDB = void 0;
 
-if (process.env.OPENSHIFT_NODEJS_PORT || process.env.OPENSHIFT_NODEJS_IP) {
-  configDB = _db2.default.getNewLive(process.env.DBUSERNAME, process.env.DBPASSWORD);
-} else {
-  configDB = _db2.default.getLocal(null, null);
-}
+// if(process.env.OPENSHIFT_NODEJS_PORT || process.env.OPENSHIFT_NODEJS_IP) {
+configDB = _db2.default.getNewLive(process.env.DBUSERNAME, process.env.DBPASSWORD);
+// } else {
+// configDB = db.getLocal(null, null);
+// }
 
 _mongoose2.default.connect(configDB);
 

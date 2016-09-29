@@ -31,14 +31,15 @@ export default function users(app) {
     });
   });
   app.get("/api/users/list/:limit", (req, res) => {
-    if(!req.params.limit > 0) {
+    if(!+req.params.limit > 0) {
       res.sendStatus(400);
     } else {
       Modlist.find({}, {username: 1, timestamp: 1, score: 1})
       .sort({"timestamp": -1})
-      .limit(req.params.limit)
+      .limit(+req.params.limit)
       .exec((err, _mods) => {
         if(err) {
+          console.log(err);
           res.sendStatus(500);
         } else {
           const mods = [];
