@@ -28,7 +28,7 @@ let configDB;
 
 mongoose.connect(configDB);
 
-const ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
+const ipaddress = process.env.OPENSHIFT_NODEJS_IP || "0.0.0.0";
 const port = process.env.OPENSHIFT_NODEJS_PORT || 3001;
 
 const corsOptions = {

@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.3.2 (10/13/2016)
+
+**Implemented Enhancements**
+
+- none
+
+**Bugs**
+
+- fixed limited users search route, had to cast to int
+
 ## 1.3.1 (9/28/2016)
 
 **Implemented Enhancements**

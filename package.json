@@ -1,6 +1,6 @@
 {
   "name": "modwatchapi",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Modwatch API",
   "keywords": [
     "OpenShift",
@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "dev": "DBEXPRESSSECRET=fakesecret node server.js",
+    "dev": "(rhc env list -a modwatchapi | tr \"\n\" \" \"; echo \"node server.js\") | bash",
     "build": "babel ./src/ --presets es2015 --out-dir ./dist/",
     "watch": "babel ./src/ -w --presets es2015 --out-dir ./dist/"
   },
