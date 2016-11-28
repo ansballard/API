@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = upload;
 
-var _modlist2 = require("../modlist");
+var _modlist2 = require("../models/modlist");
 
 var _modlist3 = _interopRequireDefault(_modlist2);
 

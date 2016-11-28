@@ -9,7 +9,7 @@ var _mongoSanitize = require("mongo-sanitize");
 
 var _mongoSanitize2 = _interopRequireDefault(_mongoSanitize);
 
-var _modlist = require("../modlist");
+var _modlist = require("../models/modlist");
 
 var _modlist2 = _interopRequireDefault(_modlist);
 

@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = user;
 
-var _modlist = require("../modlist");
+var _modlist = require("../models/modlist");
 
 var _modlist2 = _interopRequireDefault(_modlist);
 
@@ -107,6 +107,23 @@ function user(app) {
         });
       } else {
         res.sendStatus(403);
+      }
+    });
+  });
+  app.post("/api/user/:username/changepass", function (req, res) {
+    _modlist2.default.findOne({ "username": req.params.username }, function (err, modlist) {
+      if (err) {
+        res.sendStatus(500);
+      } else if (!modlist || !req.body.newpassword || !req.body.password) {
+        console.log(req.body.password, req.body.newpassword);
+        res.sendStatus(400);
+      } else if (!modlist.validPassword(req.body.password)) {
+        res.sendStatus(403);
+      } else {
+        modlist.password = modlist.generateHash(req.body.newpassword);
+        modlist.save(function (err2) {
+          res.sendStatus(err2 ? 500 : 200);
+        });
       }
     });
   });

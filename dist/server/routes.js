@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _modlist = require("./modlist");
+var _modlist = require("./models/modlist");
 
 var _modlist2 = _interopRequireDefault(_modlist);
 
@@ -17,10 +17,6 @@ var _user2 = _interopRequireDefault(_user);
 var _users = require("./routes/users");
 
 var _users2 = _interopRequireDefault(_users);
-
-var _votes = require("./routes/votes");
-
-var _votes2 = _interopRequireDefault(_votes);
 
 var _upload = require("./routes/upload");
 
@@ -40,6 +36,7 @@ var _auth2 = _interopRequireDefault(_auth);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import votes from "./routes/votes";
 exports.default = routes;
 
 
@@ -47,11 +44,15 @@ function routes(app, jwt, scriptVersion) {
 
 	(0, _user2.default)(app);
 	(0, _users2.default)(app);
-	(0, _votes2.default)(app, jwt);
+	// votes(app, jwt);
 	(0, _auth2.default)(app, jwt);
 	(0, _upload2.default)(app);
 	(0, _script2.default)(app, scriptVersion);
 	(0, _search2.default)(app);
+
+	app.get("/", function (req, res) {
+		res.end("<h1>Modwatch JSON API</h1>");
+	});
 
 	app.get("/health", function (req, res) {
 		res.sendStatus(200);

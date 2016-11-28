@@ -1,6 +1,4 @@
-"use strict";
-
-import Modlist from "../modlist";
+import Modlist from "../models/modlist";
 
 export default function upload(app) {
   app.post("/loadorder", (req, res) => {

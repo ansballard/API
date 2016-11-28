@@ -1,5 +1,3 @@
-"use strict";
-
 export default function script(app, scriptVersion) {
   app.get("/api/script/version", (req, res) => {
     res.set("Content-Type", "text/plain");

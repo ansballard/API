@@ -1,6 +1,4 @@
-"use strict";
-
-import Modlist from "../modlist";
+import Modlist from "../models/modlist";
 import { validFiletype } from "./utils";
 
 export default function user(app) {
@@ -111,4 +109,21 @@ export default function user(app) {
 			}
 		);
 	});
+  app.post("/api/user/:username/changepass", (req, res) => {
+    Modlist.findOne({"username": req.params.username}, (err, modlist) => {
+      if(err) {
+        res.sendStatus(500);
+      } else if (!modlist || !req.body.newpassword || !req.body.password) {
+        console.log(req.body.password, req.body.newpassword)
+        res.sendStatus(400);
+      } else if (!modlist.validPassword(req.body.password)) {
+        res.sendStatus(403);
+      } else {
+        modlist.password = modlist.generateHash(req.body.newpassword);
+        modlist.save(err2 => {
+          res.sendStatus(err2 ? 500 : 200);
+        });
+      }
+    });
+  })
 }

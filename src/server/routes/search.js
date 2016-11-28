@@ -1,5 +1,5 @@
 import sanitize from "mongo-sanitize";
-import Modlist from "../modlist";
+import Modlist from "../models/modlist";
 import { validFiletype } from "./utils";
 
 export default function search(app) {

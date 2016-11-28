@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.4.0 (11/27/2016)
+
+**Implemented Enhancements**
+
+- Added a route for changing passwords from the uploader
+- Return game data in user list endpoint
+- Added yarn
+- better local dev scripts
+
+**Bugs**
+
+- cleaning use stricts
+- moved models to folder
+- fixed eslint
+
 ## 1.3.2 (10/13/2016)
 
 **Implemented Enhancements**

@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = votes;
 
-var _modlist = require("../modlist");
+var _modlist = require("../models/modlist");
 
 var _modlist2 = _interopRequireDefault(_modlist);
 

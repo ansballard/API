@@ -1,5 +1,3 @@
-"use strict";
-
 export default {
 	getDev(username, password) {
 		return `mongodb://${username}:${password}@ds051873.mongolab.com:51873/modwatchdev`;

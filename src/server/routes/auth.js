@@ -1,5 +1,5 @@
 import sanitize from "mongo-sanitize";
-import Modlist from "../modlist";
+import Modlist from "../models/modlist";
 
 export default function auth(app, jwt) {
   app.post("/auth/checkToken", (req, res) => {

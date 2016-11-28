@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = users;
 
-var _modlist = require("../modlist");
+var _modlist = require("../models/modlist");
 
 var _modlist2 = _interopRequireDefault(_modlist);
 
@@ -42,14 +42,20 @@ function users(app) {
     if (!+req.params.limit > 0) {
       res.sendStatus(400);
     } else {
-      _modlist2.default.find({}, { username: 1, timestamp: 1, score: 1 }).sort({ "timestamp": -1 }).limit(+req.params.limit).exec(function (err, _mods) {
+      _modlist2.default.find({}, { username: 1, timestamp: 1, score: 1, game: 1 }).sort({ "timestamp": -1 }).limit(+req.params.limit).exec(function (err, _mods) {
         if (err) {
           console.log(err);
           res.sendStatus(500);
         } else {
           var mods = [];
           for (var i = _mods.length - 1, j = 0; i >= 0; i--, j++) {
-            mods[j] = { "username": _mods[i].username, "score": _mods[i].score, "timestamp": _mods[i].timestamp };
+            console.log(_mods[i].game);
+            mods[j] = {
+              username: _mods[i].username,
+              score: _mods[i].score,
+              timestamp: _mods[i].timestamp,
+              game: _mods[i].game === "skyrim" ? undefined : _mods[i].game
+            };
           }
           res.set("Content-Type", "application/json");
           res.json(mods);

@@ -1,11 +1,9 @@
-"use strict";
-
-import Modlist from "./modlist";
+import Modlist from "./models/modlist";
 import { tokenEnsureAuthorized } from "./routes/utils";
 
 import user from "./routes/user";
 import users from "./routes/users";
-import votes from "./routes/votes";
+// import votes from "./routes/votes";
 import upload from "./routes/upload";
 import script from "./routes/script";
 import search from "./routes/search";
@@ -17,11 +15,15 @@ function routes(app, jwt, scriptVersion) {
 
 	user(app);
 	users(app);
-	votes(app, jwt);
+	// votes(app, jwt);
 	auth(app, jwt);
 	upload(app);
 	script(app, scriptVersion);
 	search(app);
+
+	app.get("/", (req, res) => {
+		res.end("<h1>Modwatch JSON API</h1>");
+	});
 
 	app.get("/health", (req, res) => {
 		res.sendStatus(200);

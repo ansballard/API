@@ -3,3 +3,5 @@
 /*.min.js
 /*.min.js.map
 /npm-debug.log
+/.data
+/.logs

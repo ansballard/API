@@ -1,5 +1,3 @@
-"use strict";
-
 const supportedFiletypes = [
 	"plugins",
 	"modlist",

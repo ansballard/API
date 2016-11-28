@@ -1,6 +1,4 @@
-"use strict";
-
-import Modlist from "../modlist";
+import Modlist from "../models/modlist";
 import { tokenEnsureAuthorized } from "./utils";
 
 export default function votes(app, jwt) {

@@ -20,11 +20,11 @@ const app = express();
 
 let configDB;
 
-// if(process.env.OPENSHIFT_NODEJS_PORT || process.env.OPENSHIFT_NODEJS_IP) {
+if(process.env.OPENSHIFT_NODEJS_PORT || process.env.OPENSHIFT_NODEJS_IP) {
 	configDB = db.getNewLive(process.env.DBUSERNAME, process.env.DBPASSWORD);
-// } else {
-	// configDB = db.getLocal(null, null);
-// }
+} else {
+	configDB = db.getLocal();
+}
 
 mongoose.connect(configDB);
 
