@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.5.1 (04/02/2017)
+
+**Implemented Enhancements**
+
+- none
+
+**Bugs**
+
+- promisify mongoose
+- remove deprecated fields from Schema
+  - will it break everything? Probably not. I dunno.
+
 ## 1.5.0 (04/02/2017)
 
 **Implemented Enhancements**
