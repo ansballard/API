@@ -1,1 +1,3 @@
-require("./dist/server/app.js");
+"use strict";
+
+require("./lib/server/app.js");

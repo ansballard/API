@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.5.0 (04/02/2017)
+
+**Implemented Enhancements**
+
+- Added `helmet` and `compression`
+- removed es6 modules and babel transpilation
+- removed `methodoverride` and extra `cors()` call
+
+**Bugs**
+
+- don't pass jwt, just require in each file
+- little cleaning things
+
 ## 1.4.0 (11/27/2016)
 
 **Implemented Enhancements**
