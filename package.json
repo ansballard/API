@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "(rhc env list -a modwatchapi | tr \"\n\" \" \"; echo \"node server.js\") | bash",
-    "localdev": "DBEXPRESSSECRET=whatever nodemon server.js --delay 1 --watch ./lib",
+    "localdev": "cross-env DBEXPRESSSECRET=whatever JWTSECRET=whatever nodemon server.js --delay 1 --watch ./lib",
     "localdb": "mongod --dbpath ./.data --logpath ./.logs/mongolog"
   },
   "homepage": "http://www.openshift.com/",
@@ -29,6 +29,7 @@
     "compression": "^1.6.2",
     "cookie-parser": "^1.3.4",
     "cors": "^2.5.3",
+    "ejs": "^2.5.6",
     "express": "^4.11.2",
     "express-session": "^1.10.3",
     "helmet": "^3.5.0",
@@ -43,6 +44,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.0.4",
+    "cross-env": "^4.0.0",
     "eslint": "^3.8.1",
     "nodemon": "^1.11.0"
   },
