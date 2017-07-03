@@ -9,9 +9,8 @@
   },
   "scripts": {
     "start": "node server.js",
-    "dev": "(rhc env list -a modwatchapi | tr \"\n\" \" \"; echo \"node server.js\") | bash",
-    "localdev": "cross-env DBEXPRESSSECRET=whatever JWTSECRET=whatever nodemon server.js --delay 1 --watch ./lib",
-    "localdb": "mongod --dbpath ./.data --logpath ./.logs/mongolog"
+    "dev": "cross-env MODWATCH_DEV=true nodemon server.js --delay 1 --watch ./lib",
+    "local": "cross-env MODWATCH_DEV=true nodemon server.js --delay 1 --watch ./lib"
   },
   "homepage": "http://www.openshift.com/",
   "repository": {
