@@ -46,7 +46,8 @@
     "babel-eslint": "^6.0.4",
     "cross-env": "^4.0.0",
     "eslint": "^3.8.1",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "prompt": "^1.0.0"
   },
   "bundleDependencies": [],
   "private": true,
