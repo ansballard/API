@@ -2,7 +2,7 @@ const getConnectionString = require("./lib/config/db");
 const app = require("./lib/server/app");
 
 const config = {
-  connectionString: getConnectionString({env: "production"}),
+  connectionString: getConnectionString({env: "production", username: process.env.DBUSERNAME, password: process.env.DBPASSWORD}),
   expressSecret: process.env.DBEXPRESSSECRET,
   jwtSecret: process.env.JWTSECRET,
   ip: process.env.OPENSHIFT_NODEJS_IP,
