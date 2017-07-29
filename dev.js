@@ -15,17 +15,25 @@ prompt.get(
         message: "mlab dev database password",
         required: true,
         hidden: true
+      },
+      env: {
+        message: "Database to connect to (development|production)",
+        default: "development",
+        pattern: /(development|production)/
       }
     }
-  }, (err, { username, password }) => {
+  }, (err, { username, password, env }) => {
+  if(err || !username || !password || !env) {
+    console.log("Error during setup, try again");
+    process.exit(0);
+  }
   const config = {
-    connectionString: getConnectionString({username, password, env: "development"}),
+    connectionString: getConnectionString({username, password, env}),
     expressSecret: "development",
     jwtSecret: "development",
     ip: "0.0.0.0",
     port: 3001,
     env: "development"
   };
-
   app(config);
 });
