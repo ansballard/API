@@ -9,10 +9,10 @@ prompt.get(
   {
     properties: {
       username: {
-        message: "mlab dev database username",
+        message: "mlab database username",
         required: true
       }, password: {
-        message: "mlab dev database password",
+        message: "mlab database password",
         required: true,
         hidden: true
       },
