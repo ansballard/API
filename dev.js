@@ -35,5 +35,5 @@ prompt.get(
     port: 3001,
     env: "development"
   };
-  app(config);
+  let server = app(config);
 });
