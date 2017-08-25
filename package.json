@@ -1,6 +1,6 @@
 {
   "name": "modwatchapi",
-  "version": "1.5.1",
+  "version": "2.0.0",
   "description": "Modwatch API",
   "author": {
     "name": "Aaron Ballard",
@@ -9,9 +9,8 @@
   },
   "scripts": {
     "start": "node server.js",
-    "dev": "(rhc env list -a modwatchapi | tr \"\n\" \" \"; echo \"node server.js\") | bash",
-    "localdev": "DBEXPRESSSECRET=whatever nodemon server.js --delay 1 --watch ./lib",
-    "localdb": "mongod --dbpath ./.data --logpath ./.logs/mongolog"
+    "dev": "cross-env MODWATCH_DEV=true nodemon server.js --delay 1 --watch ./lib",
+    "local": "cross-env MODWATCH_DEV=true nodemon server.js --delay 1 --watch ./lib"
   },
   "homepage": "http://www.openshift.com/",
   "repository": {
@@ -29,10 +28,13 @@
     "compression": "^1.6.2",
     "cookie-parser": "^1.3.4",
     "cors": "^2.5.3",
+    "ejs": "^2.5.6",
     "express": "^4.11.2",
     "express-session": "^1.10.3",
     "helmet": "^3.5.0",
     "jsonwebtoken": "^5.0.5",
+    "jwt-simple": "^0.5.1",
+    "marked": "^0.3.6",
     "method-override": "^2.3.1",
     "mongo-sanitize": "^1.0.0",
     "mongoose": "^4.1.8",
@@ -42,8 +44,10 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.0.4",
+    "cross-env": "^4.0.0",
     "eslint": "^3.8.1",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "prompt": "^1.0.0"
   },
   "bundleDependencies": [],
   "private": true,
