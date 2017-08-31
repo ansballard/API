@@ -1,5 +1,4 @@
 /node_modules/*
-/.openshift/*
 /*.min.js
 /*.min.js.map
 /npm-debug.log
