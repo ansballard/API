@@ -5,8 +5,8 @@ const config = {
   connectionString: getConnectionString({env: "production", username: process.env.DBUSERNAME, password: process.env.DBPASSWORD}),
   expressSecret: process.env.DBEXPRESSSECRET,
   jwtSecret: process.env.JWTSECRET,
-  ip: process.env.OPENSHIFT_NODEJS_IP,
-  port: process.env.OPENSHIFT_NODEJS_PORT,
+  ip: process.env.IP || process.env.OPENSHIFT_NODEJS_IP,
+  port: process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT,
   env: "production"
 };
 
