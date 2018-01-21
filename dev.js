@@ -17,9 +17,9 @@ prompt.get(
         hidden: true
       },
       env: {
-        message: "Database to connect to (development|production)",
+        message: "Database to connect to (development|production|local)",
         default: "development",
-        pattern: /(development|production)/
+        pattern: /(development|production|local)/
       }
     }
   }, (err, { username, password, env }) => {
