@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const getConnectionString = require("./lib/config/db");
 const app = require("./lib/server/app");
 const config = {
