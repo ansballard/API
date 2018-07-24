@@ -11,7 +11,8 @@
     "start": "pm2 start server.js",
     "restart": "pm2 restart all",
     "dev": "cross-env MODWATCH_DEV=true nodemon server.js --delay 1 --watch ./lib",
-    "local": "cross-env MODWATCH_DEV=true nodemon server.js --delay 1 --watch ./lib"
+    "local": "cross-env MODWATCH_DEV=true nodemon server.js --delay 1 --watch ./lib",
+    "prettier": "prettier --write '{server.js,lib/**/*.ts}'"
   },
   "homepage": "http://www.openshift.com/",
   "repository": {
@@ -36,19 +37,32 @@
     "jsonwebtoken": "^5.0.5",
     "jwt-simple": "^0.5.1",
     "method-override": "^2.3.1",
+    "micro": "^9.3.1",
+    "micro-compress": "^1.0.0",
+    "micro-cors": "^0.1.0",
+    "microrouter": "^3.1.3",
     "mongo-sanitize": "^1.0.0",
+    "mongodb": "^3.1.0-beta4",
     "mongoose": "^4.1.8",
     "morgan": "^1.6.1",
     "passport": "^0.3.0",
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
+    "@types/micro": "^7.3.1",
+    "@types/microrouter": "^2.2.2",
+    "@types/mongodb": "^3.0.18",
+    "@types/node": "^10.1.3",
     "babel-eslint": "^6.0.4",
     "cross-env": "^4.0.0",
     "eslint": "^3.8.1",
+    "micro-dev": "^3.0.0",
     "nodemon": "^1.11.0",
     "pm2": "^2.7.1",
-    "prompt": "^1.0.0"
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.13.5",
+    "prompt": "^1.0.0",
+    "typescript": "^2.8.3"
   },
   "bundleDependencies": [],
   "private": true,
