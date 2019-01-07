@@ -49,7 +49,7 @@ export async function validPassword(password: string, hash: string): Promise<boo
   }
 };
 
-export function getToken(req: ServerRequest) {
+export function getToken(req: ServerRequest): string {
   try {
     const bearerHeader = req.headers.authorization;
     if (typeof bearerHeader === "undefined") {
@@ -64,6 +64,10 @@ export function getToken(req: ServerRequest) {
       message: "Invalid Token"
     }
   }
+}
+
+export function serialize(query: object): string {
+  return Object.keys(query).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`).join("&");
 }
 
 export async function generateToken(username: string, password: string): Promise<string> {
@@ -83,7 +87,7 @@ export async function generateToken(username: string, password: string): Promise
   return encode({ username }, process.env.JWT_SECRET);
 };
 
-export function verifyToken(token: string): boolean {
+export function verifyToken(token: string): any {
   try {
     const decoded = decode(token, process.env.JWT_SECRET);
     if(!decoded || !decoded.username) {

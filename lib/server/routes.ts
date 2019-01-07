@@ -19,6 +19,8 @@ const { get } = require("microrouter");
 const usersRoutes = require("./routes/users");
 const userRoutes = require("./routes/user");
 const uploadRoutes = require("./routes/upload");
+const authRoutes = require("./routes/auth");
+const oauthRoutes = require("./routes/oauth");
 
 module.exports = [
   get("/", (req: ServerRequest, res: ServerResponse) => {
@@ -26,5 +28,7 @@ module.exports = [
   }),
   ...usersRoutes,
   ...userRoutes,
-  ...uploadRoutes
+  ...uploadRoutes,
+  ...authRoutes,
+  ...oauthRoutes
 ];

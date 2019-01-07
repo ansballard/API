@@ -3,7 +3,7 @@ import { send } from "micro";
 
 import { getUsersCount, getUsersList, searchProfiles } from "../database";
 
-module.exports = [
+export default [
   get("/api/users/count", async (req: ServerRequest, res: ServerResponse) => {
     try {
         send(res, 200, await getUsersCount());

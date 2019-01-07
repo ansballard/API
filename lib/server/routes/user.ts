@@ -4,15 +4,7 @@ import { send, json } from "micro";
 import { getProfile, changePass, deleteProfile } from "../database";
 import { validFiletype } from "../utils";
 
-// /api/user /: username / file /: filetype
-// / api / user /: username / rawfile /: filetype
-// / api / user /: username / profile
-// / api / user /: username / files
-// / api / user /: username / all
-// / api / user /: username / delete
-// /api/user /: username / changepass
-
-module.exports = [
+export default [
   get("/api/user/:username/file/:filetype", async (req: ServerRequest, res: ServerResponse) => {
     if(!validFiletype(req.params.filetype as Modwatch.FileNames)) {
       send(res, 400, "Invalid Filetype");
@@ -25,7 +17,7 @@ module.exports = [
       send(res, 404);
     } catch (e) {
       console.log(e);
-      send(res, 500);
+      send(res, e.httpStatus || 500, e.message || null);
     }
   }),
   get("/api/user/:username/profile", async (req: ServerRequest, res: ServerResponse) => {
@@ -41,7 +33,7 @@ module.exports = [
       send(res, 200, { timestamp, tag, game, enb, score });
     } catch (e) {
       console.log(e);
-      send(res, 500);
+      send(res, e.httpStatus || 500, e.message || null);
     }
   }),
   get("/api/user/:username/files", async (req: ServerRequest, res: ServerResponse) => {

@@ -2,7 +2,8 @@ declare namespace Modwatch {
   export interface Profile {
     username: string;
     password: string;
-    roles?: Roles;
+    roles?: Roles[];
+    scopes?: Roles[];
     game: Games;
     timestamp: number;
     plugins: Plugins;

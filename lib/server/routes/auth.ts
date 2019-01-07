@@ -1,14 +1,10 @@
 import { post, ServerRequest, ServerResponse } from "microrouter";
 import { send, json } from "micro";
-import { decode } from "jwt-simple";
 
-import { uploadProfile, getProfile } from "../database";
-import { getToken, verifyToken, validPassword, generateToken } from "../utils";
+import { getProfile } from "../database";
+import { verifyToken, validPassword, generateToken } from "../utils";
 
-// /auth/checkToken
-// /auth/signin
-
-module.exports = [
+export default [
     post("/auth/checkToken", async (req: ServerRequest, res: ServerResponse) => {
         try {
             const body = await json(req) as { token: string, username: string };

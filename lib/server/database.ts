@@ -1,7 +1,7 @@
 import { MongoClient, Collection } from "mongodb";
 
 import config from "../config/db";
-import { generateHash, validPassword, verifyToken } from "./utils";
+import { generateHash, validPassword, verifyToken, getToken } from "./utils";
 
 const client = MongoClient.connect(
   config({
@@ -97,7 +97,7 @@ export async function searchProfiles(query, limit = 50) {
     .toArray();
 }
 
-export async function deleteProfile(username: string, password: string) {
+export async function deleteProfile(username: string, password: string, adminToken?: string) {
   const modlist = await initializeModlistCollection();;
   const exists = await getProfile({ username });
   if (!exists) {
@@ -106,11 +106,21 @@ export async function deleteProfile(username: string, password: string) {
       message: "Username not found"
     };
   }
-  if(!await validPassword(password, exists.password)) {
-    throw {
-      httpStatus: 401,
-      message: "Invalid Login"
-    };
+  if(!adminToken) {
+    if (!await validPassword(password, exists.password)) {
+      throw {
+        httpStatus: 401,
+        message: "Invalid Login"
+      };
+    }
+  } else {
+    const token = await verifyToken(adminToken);
+    if(!token.roles.includes["admin"]) {
+      throw {
+        httpStatus: 401,
+        message: "Insufficient Permissions"
+      };
+    }
   }
   return await modlist.deleteOne({
     username
