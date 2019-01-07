@@ -18,11 +18,13 @@ const { get } = require("microrouter");
 
 const usersRoutes = require("./routes/users");
 const userRoutes = require("./routes/user");
+const uploadRoutes = require("./routes/upload");
 
 module.exports = [
   get("/", (req: ServerRequest, res: ServerResponse) => {
     send(res, 200, "Index!");
   }),
   ...usersRoutes,
-  ...userRoutes
+  ...userRoutes,
+  ...uploadRoutes
 ];

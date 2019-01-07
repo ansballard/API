@@ -4,7 +4,7 @@ declare namespace Modwatch {
     password: string;
     roles?: Roles;
     game: Games;
-    timestamp: Date;
+    timestamp: number;
     plugins: Plugins;
     modlist?: Modlist;
     ini?: Ini;
@@ -15,6 +15,7 @@ declare namespace Modwatch {
   }
   export type Games = "skyrim" | "skyrimse" | "fallout4"
   export type FileNames = "plugins" | "modlist" | "ini" | "prefsini"
+  export type File = string;
   export type FileTypes = Plugins | Modlist | Ini | PrefsIni
   export type Plugins = string[]
   export type Modlist = string[]

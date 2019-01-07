@@ -1,4 +1,4 @@
-module.exports = ({
+export default ({
   username,
   password,
   env
@@ -9,6 +9,4 @@ module.exports = ({
 }) =>
   env === "production"
     ? `mongodb://${username}:${password}@ds037283.mlab.com:37283/modwatch`
-    : env === "development"
-      ? `mongodb://${username}:${password}@ds051873.mlab.com:51873/modwatchdev`
-      : "localhost:27017/modwatch";
+    : "mongodb://localhost:27017/modwatch";

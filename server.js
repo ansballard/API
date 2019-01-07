@@ -6,7 +6,7 @@ const config = {
   jwtSecret: process.env.JWTSECRET,
   ip: process.env.IP || "0.0.0.0",
   port: process.env.PORT || 3001,
-  env: "production"
+  env: process.env.NODE_ENV || "local"
 };
 
 micro(app).listen(config.port, config.ip, () => {

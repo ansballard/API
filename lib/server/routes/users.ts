@@ -1,10 +1,7 @@
-import { ServerRequest, ServerResponse } from "microrouter";
+import { get, ServerRequest, ServerResponse } from "microrouter";
+import { send } from "micro";
 
-const { get } = require("microrouter");
-const { send } = require("micro");
-
-const { getUsersCount, getUsersList } = require("../database");
-const { serializeStreamToJSONArray } = require("../utils");
+import { getUsersCount, getUsersList, searchProfiles } from "../database";
 
 module.exports = [
   get("/api/users/count", async (req: ServerRequest, res: ServerResponse) => {
@@ -32,23 +29,15 @@ module.exports = [
               ? +req.params.limit
               : undefined
         });
-        res.writeHead(200, {
-          "Content-Type": "application/json"
-        });
-        await serializeStreamToJSONArray({
-          cursor: users,
-          res,
-          serializer: (user: Modwatch.Profile) =>
-            `{"username":${JSON.stringify(
-              user.username
-            )},"timestamp":"${user.timestamp.toISOString()}","score":${user.score ||
-              0}}`
-        });
-        res.end();
+        send(res, 200, users);
       } catch (e) {
         console.log(e);
         send(res, 500);
       }
     }
-  )
+  ),
+  get("/api/search/users/:query/:limit", async (req: ServerRequest, res: ServerResponse) => {
+    const users = await searchProfiles(req.params.query, req.params.limit ? +req.params.limit : undefined);
+    send(res, 200, users);
+  })
 ];
