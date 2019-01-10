@@ -14,7 +14,6 @@ const renderFileAsync = promisify(renderFile);
 
 const clients = [
   "https://modwat.ch",
-  "http://localhost:3000",
   "https://modwatch-staging.firebaseapp.com"
 ].concat(process.env.NODE_ENV !== "production" ? 
 "http://localhost:3000" : []);
