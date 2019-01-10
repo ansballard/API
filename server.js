@@ -1,13 +1,14 @@
 #!/usr/bin/env node
-const getConnectionString = require("./lib/config/db");
-const app = require("./lib/server/app");
+const micro = require("micro");
+const app = require("./dist/server/micro");
 const config = {
-  connectionString: getConnectionString({env: process.env.NODE_ENV || "production", username: process.env.DBUSERNAME, password: process.env.DBPASSWORD}),
   expressSecret: process.env.DBEXPRESSSECRET,
   jwtSecret: process.env.JWTSECRET,
-  ip: process.env.IP || process.env.OPENSHIFT_NODEJS_IP,
-  port: process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT,
-  env: "production"
+  ip: process.env.IP || "0.0.0.0",
+  port: process.env.PORT || 3001,
+  env: process.env.NODE_ENV || "local"
 };
 
-app(config);
+micro(app).listen(config.port, config.ip, () => {
+  console.log(`Started Server at ${config.ip}:${config.port}`);
+});

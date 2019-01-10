@@ -5,4 +5,5 @@
 /.data
 /.logs
 .env
-.vscode
+*.env
+/.vscode

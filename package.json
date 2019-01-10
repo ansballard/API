@@ -1,6 +1,6 @@
 {
   "name": "modwatchapi",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "description": "Modwatch API",
   "author": {
     "name": "Aaron Ballard",
@@ -10,8 +10,9 @@
   "scripts": {
     "start": "pm2 start server.js",
     "restart": "pm2 restart all",
-    "dev": "cross-env MODWATCH_DEV=true nodemon server.js --delay 1 --watch ./lib",
-    "local": "cross-env MODWATCH_DEV=true nodemon server.js --delay 1 --watch ./lib"
+    "dev": "micro ./dist/server/micro.js -p 3001",
+    "local": "cross-env MODWATCH_DEV=true nodemon server.js --delay 1 --watch ./lib",
+    "prettier": "prettier --write '{server.js,lib/**/*.ts}'"
   },
   "homepage": "http://www.openshift.com/",
   "repository": {
@@ -24,31 +25,29 @@
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
-    "bluebird": "^3.5.1",
-    "body-parser": "^1.18.3",
-    "compression": "^1.7.3",
-    "cookie-parser": "^1.3.4",
-    "cors": "^2.8.4",
     "ejs": "^2.6.1",
-    "express": "^4.16.3",
-    "express-session": "^1.15.6",
-    "helmet": "^3.13.0",
-    "jsonwebtoken": "^8.3.0",
-    "jwt-simple": "^0.5.1",
-    "method-override": "^3.0.0",
-    "mongo-sanitize": "^1.0.0",
-    "mongoose": "^5.2.5",
-    "morgan": "^1.9.0",
-    "passport": "^0.4.0",
-    "passport-local": "^1.0.0"
+    "helmet": "^3.15.0",
+    "jwt-simple": "^0.5.5",
+    "micro": "^9.3.3",
+    "micro-compress": "^1.0.0",
+    "micro-cors": "^0.1.1",
+    "microrouter": "^3.1.3",
+    "mongo-sanitize": "^1.0.1",
+    "mongodb": "^3.1.10",
+    "url-pattern": "^1.0.3",
+    "urlencoded-body-parser": "^2.0.1"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.6",
-    "cross-env": "^5.2.0",
-    "eslint": "^5.2.0",
-    "nodemon": "^1.18.3",
-    "pm2": "^3.0.0",
-    "prompt": "^1.0.0"
+    "@types/micro": "^7.3.3",
+    "@types/microrouter": "^3.1.0",
+    "@types/mongodb": "^3.1.18",
+    "@types/node": "^10.12.18",
+    "micro-dev": "^3.0.0",
+    "pm2": "^3.2.4",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.15.3",
+    "prompt": "^1.0.0",
+    "typescript": "^3.2.2"
   },
   "bundleDependencies": [],
   "private": true,
