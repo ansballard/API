@@ -1,9 +1,10 @@
 import { get, ServerRequest, ServerResponse } from "microrouter";
 import { send } from "micro";
+import UrlPattern from "url-pattern";
 
 import { getUsersCount, getUsersList, searchProfiles } from "../database";
 
-export default [
+export const routes = [
   get("/api/users/count", async (req: ServerRequest, res: ServerResponse) => {
     try {
         send(res, 200, await getUsersCount());
@@ -36,8 +37,9 @@ export default [
       }
     }
   ),
-  get("/api/search/users/:query/:limit", async (req: ServerRequest, res: ServerResponse) => {
-    const users = await searchProfiles(req.params.query, req.params.limit ? +req.params.limit : undefined);
+  //@ts-ignore UrlPattern is allowed as a parameter to micro-router methods
+  get(new UrlPattern("/api/search/users/:query/:limit", usernameRegex), async (req: ServerRequest, res: ServerResponse) => {
+    const users = await searchProfiles(decodeURIComponent(req.params.query), req.params.limit ? +req.params.limit : undefined);
     send(res, 200, users);
   })
 ];

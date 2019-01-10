@@ -1,7 +1,8 @@
 import { MongoClient, Collection } from "mongodb";
 
-import config from "../config/db";
-import { generateHash, validPassword, verifyToken, getToken } from "./utils";
+import { config } from "../config/db";
+import { generateHash, validPassword, verifyToken } from "./utils";
+import sanitize from "mongo-sanitize";
 
 const client = MongoClient.connect(
   config({
@@ -88,7 +89,8 @@ export async function searchProfiles(query, limit = 50) {
   const modlist = await initializeModlistCollection();
   return await modlist.find({
     username: {
-      $regex: `.*${query}.*`
+      $regex: `.*${sanitize(query)}.*`,
+      $options: "i"
     }
   })
     .project({ username: 1, timestamp: 1, score: 1, game: 1, _id: 0 })
@@ -115,7 +117,7 @@ export async function deleteProfile(username: string, password: string, adminTok
     }
   } else {
     const token = await verifyToken(adminToken);
-    if(!token.roles.includes["admin"]) {
+    if((!token || !token.scopes || !token.scopes.includes("admin")) && !await validPassword(password, exists.password)) {
       throw {
         httpStatus: 401,
         message: "Insufficient Permissions"

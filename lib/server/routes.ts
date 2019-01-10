@@ -1,34 +1,20 @@
-// const jwt = require("jsonwebtoken");
-//
-// const Modlist = require("./models/modlist");
-// const { tokenEnsureAuthorized } = require("./routes/utils");
-//
-// const user = require("./routes/user");
-// const users = require("./routes/users");
-// const upload = require("./routes/upload");
-// const script = require("./routes/script");
-// const search = require("./routes/search");
-// const auth = require("./routes/auth");
-// const oauth = require("./routes/oauth");
+import { get, ServerRequest, ServerResponse } from "microrouter";
 
-import { ServerRequest, ServerResponse } from "microrouter";
+import { send } from "micro";
 
-const { send } = require("micro");
-const { get } = require("microrouter");
+import { routes as users } from "./routes/users";
+import { routes as user } from "./routes/user";
+import { routes as upload } from "./routes/upload";
+import { routes as auth } from "./routes/auth";
+import { routes as oauth } from "./routes/oauth";
 
-const usersRoutes = require("./routes/users");
-const userRoutes = require("./routes/user");
-const uploadRoutes = require("./routes/upload");
-const authRoutes = require("./routes/auth");
-const oauthRoutes = require("./routes/oauth");
-
-module.exports = [
+export const routes = [
   get("/", (req: ServerRequest, res: ServerResponse) => {
     send(res, 200, "Index!");
   }),
-  ...usersRoutes,
-  ...userRoutes,
-  ...uploadRoutes,
-  ...authRoutes,
-  ...oauthRoutes
+  ...users,
+  ...user,
+  ...upload,
+  ...auth,
+  ...oauth
 ];

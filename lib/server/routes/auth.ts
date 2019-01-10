@@ -4,7 +4,7 @@ import { send, json } from "micro";
 import { getProfile } from "../database";
 import { verifyToken, validPassword, generateToken } from "../utils";
 
-export default [
+export const routes = [
     post("/auth/checkToken", async (req: ServerRequest, res: ServerResponse) => {
         try {
             const body = await json(req) as { token: string, username: string };

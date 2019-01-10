@@ -4,7 +4,7 @@ import { send, json } from "micro";
 import { uploadProfile } from "../database";
 import { getToken } from "../utils";
 
-export default [
+export const routes = [
   post("/loadorder", async (req: ServerRequest, res: ServerResponse) => {
     try {
       const body = await json(req) as Modwatch.Profile;

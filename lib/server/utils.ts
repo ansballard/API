@@ -10,25 +10,16 @@ const compareAsync = promisify(bcrypt.compare);
 const hashAsync = promisify(bcrypt.hash);
 const genSaltAsync = promisify(bcrypt.genSalt);
 
-// exports.tokenEnsureAuthorized = function(req, res, next) {
-// 	let bearerToken;
-// 	const bearerHeader = req.headers.authorization;
-// 	if (typeof bearerHeader !== "undefined") {
-// 		const bearer = bearerHeader.split(" ");
-// 		bearerToken = bearer[1];
-// 		req.token = bearerToken;
-// 		next();
-// 	} else {
-// 		res.sendStatus(403);
-// 	}
-// }
-
 export const supportedFiletypes: Modwatch.FileNames[] = [
   "plugins",
   "modlist",
   "ini",
   "prefsini"
 ];
+
+export const usernameRegex = {
+  segmentValueCharset: "a-zA-Z0-9-_~ %@!\\.'\\(\\)\\[\\]"
+};
 
 export function validFiletype(
   filetype: string
@@ -84,13 +75,13 @@ export async function generateToken(username: string, password: string): Promise
       message: "Invalid Login"
     };
   }
-  return encode({ username }, process.env.JWT_SECRET);
+  return encode({ username }, process.env.JWTSECRET);
 };
 
 export function verifyToken(token: string): any {
   try {
-    const decoded = decode(token, process.env.JWT_SECRET);
-    if(!decoded || !decoded.username) {
+    const decoded = decode(token, process.env.JWTSECRET);
+    if(!decoded || !decoded.sub) {
       throw {
         httpStatus: 401,
         message: "Invalid Token"
