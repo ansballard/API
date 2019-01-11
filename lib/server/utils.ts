@@ -21,24 +21,25 @@ export const usernameRegex = {
   segmentValueCharset: "a-zA-Z0-9-_~ %@!\\.'\\(\\)\\[\\]"
 };
 
-export function validFiletype(
-  filetype: string
-): boolean {
+export function validFiletype(filetype: string): boolean {
   //@ts-ignore supportedFiletypes is strings, whatever
   return supportedFiletypes.includes(filetype);
-};
+}
 
 export async function generateHash(_password: string): Promise<string> {
   return await hashAsync(_password, await genSaltAsync(8), null);
-};
+}
 
-export async function validPassword(password: string, hash: string): Promise<boolean> {
+export async function validPassword(
+  password: string,
+  hash: string
+): Promise<boolean> {
   try {
     return await compareAsync(password, hash);
   } catch (e) {
     return false;
   }
-};
+}
 
 export function getToken(req: ServerRequest): string {
   try {
@@ -48,54 +49,59 @@ export function getToken(req: ServerRequest): string {
     }
     const bearer = bearerHeader.split(" ");
     return bearer[1];
-  } catch(e) {
+  } catch (e) {
     console.log(e);
     throw {
       httpStatus: 401,
       message: "Invalid Token"
-    }
+    };
   }
 }
 
 export function serialize(query: object): string {
-  return Object.keys(query).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`).join("&");
+  return Object.keys(query)
+    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`)
+    .join("&");
 }
 
-export async function generateToken(username: string, password: string): Promise<string> {
+export async function generateToken(
+  username: string,
+  password: string
+): Promise<string> {
   const profile = await getProfile({ username });
-  if(!profile) {
+  if (!profile) {
     throw {
       httpStatus: 404,
       message: "Profile Not Found"
     };
   }
-  if(!await validPassword(profile.password, password)) {
+  if (!(await validPassword(profile.password, password))) {
     throw {
       httpStatus: 401,
       message: "Invalid Login"
     };
   }
   return encode({ username }, process.env.JWTSECRET);
-};
+}
 
 export function verifyToken(token: string): any {
   try {
     const decoded = decode(token, process.env.JWTSECRET);
-    if(!decoded || !decoded.sub) {
+    if (!decoded || !decoded.sub) {
       throw {
         httpStatus: 401,
         message: "Invalid Token"
       };
     }
     return decoded;
-  } catch(e) {
+  } catch (e) {
     console.log(e);
     throw {
       httpStatus: 401,
       message: "Invalid Token"
     };
   }
-};
+}
 
 exports.serializeStreamToJSONArray = function serializeStreamToJSONArray({
   cursor,

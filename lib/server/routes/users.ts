@@ -8,7 +8,7 @@ import { usernameRegex } from "../utils";
 export const routes = [
   get("/api/users/count", async (req: ServerRequest, res: ServerResponse) => {
     try {
-        send(res, 200, await getUsersCount());
+      send(res, 200, await getUsersCount());
     } catch (e) {
       console.log(e);
       send(res, 500);
@@ -25,7 +25,7 @@ export const routes = [
         return;
       }
       try {
-          const users = await getUsersList({
+        const users = await getUsersList({
           limit:
             typeof req.params.limit !== "undefined"
               ? +req.params.limit
@@ -38,9 +38,15 @@ export const routes = [
       }
     }
   ),
-  //@ts-ignore UrlPattern is allowed as a parameter to micro-router methods
-  get(new UrlPattern("/api/search/users/:query/:limit", usernameRegex), async (req: ServerRequest, res: ServerResponse) => {
-    const users = await searchProfiles(decodeURIComponent(req.params.query), req.params.limit ? +req.params.limit : undefined);
-    send(res, 200, users);
-  })
+  get(
+    //@ts-ignore UrlPattern is allowed as a parameter to micro-router methods
+    new UrlPattern("/api/search/users/:query/:limit", usernameRegex),
+    async (req: ServerRequest, res: ServerResponse) => {
+      const users = await searchProfiles(
+        decodeURIComponent(req.params.query),
+        req.params.limit ? +req.params.limit : undefined
+      );
+      send(res, 200, users);
+    }
+  )
 ];

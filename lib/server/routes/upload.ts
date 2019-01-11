@@ -7,13 +7,13 @@ import { getToken } from "../utils";
 export const routes = [
   post("/loadorder", async (req: ServerRequest, res: ServerResponse) => {
     try {
-      const body = await json(req) as Modwatch.Profile;
+      const body = (await json(req)) as Modwatch.Profile;
       const profile = {
         ...body,
         timestamp: Date.now()
       };
       send(res, 201, await uploadProfile(profile, getToken(req)));
-    } catch(e) {
+    } catch (e) {
       console.log(e);
       send(res, e.httpStatus || 500, e.message || null);
     }
