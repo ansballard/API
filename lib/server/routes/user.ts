@@ -21,6 +21,7 @@ export const routes = [
       }
       if(profile[req.params.filetype]) {
         send(res, 200, profile[req.params.filetype]);
+        return;
       }
       throw {
         httpStatus: 404,
@@ -75,7 +76,11 @@ export const routes = [
         };
       }
       const { plugins, score, timestamp, game, enb, tag } = profile;
-      const files = Object.keys(profile).filter(t => validFiletype(t) && profile[t] && profile[t].length > 0);
+      const files = {};
+      for(const f of ["plugins", "modlist", "ini", "prefsini"]) {
+        files[f] = !profile[f] ? 0 : profile[f].length
+      }
+      // const files = Object.keys(profile).filter(t => validFiletype(t) && profile[t] && profile[t].length > 0);
       send(res, 200, {
         plugins, score, timestamp, game, enb, tag, files
       });

@@ -3,6 +3,7 @@ import { send } from "micro";
 import UrlPattern from "url-pattern";
 
 import { getUsersCount, getUsersList, searchProfiles } from "../database";
+import { usernameRegex } from "../utils";
 
 export const routes = [
   get("/api/users/count", async (req: ServerRequest, res: ServerResponse) => {
