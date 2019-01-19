@@ -5,7 +5,7 @@ declare namespace Modwatch {
     roles?: Roles[];
     scopes?: Roles[];
     game: Games;
-    timestamp: string;
+    timestamp: Date;
     plugins: Plugins;
     modlist?: Modlist;
     ini?: Ini;
