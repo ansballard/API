@@ -10,7 +10,7 @@ export const routes = [
       const body = (await json(req)) as Modwatch.Profile;
       const profile = {
         ...body,
-        timestamp: Date.now()
+        timestamp: new Date().toISOString()
       };
       send(res, 201, await uploadProfile(profile, getToken(req)));
     } catch (e) {

@@ -22,9 +22,12 @@ export async function getUsersList({
 }): Promise<Partial<Modwatch.Profile>[]> {
   const modlist = await initializeModlistCollection();
   return modlist
-    .find<Modwatch.Profile>({})
+    .find<Modwatch.Profile>({}, {
+      sort: [
+        ["timestamp", -1]
+      ]
+    })
     .project({ username: 1, timestamp: 1, score: 1, _id: 0 })
-    .sort({ timestamp: -1 })
     .limit(limit)
     .toArray();
 }
