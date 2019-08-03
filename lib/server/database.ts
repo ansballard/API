@@ -4,6 +4,8 @@ import { config } from "../config/db";
 import { generateHash, validPassword, verifyToken } from "./utils";
 import sanitize from "mongo-sanitize";
 
+import { Modlist, FileName } from "@modwatch/types";
+
 const client = MongoClient.connect(
   config({
     username: process.env.DBUSERNAME,
@@ -19,10 +21,10 @@ export async function getUsersList({
   limit = 50
 }: {
   limit?: number;
-}): Promise<Partial<Modwatch.Profile>[]> {
+}): Promise<Partial<Modlist>[]> {
   const modlist = await initializeModlistCollection();
   return modlist
-    .find<Modwatch.Profile>({}, {
+    .find<Modlist>({}, {
       sort: [
         ["timestamp", -1]
       ]
@@ -41,21 +43,23 @@ export async function getProfile({
   username
 }: {
   username: string;
-}): Promise<Modwatch.Profile> {
+}): Promise<Modlist> {
   const modlist = await initializeModlistCollection();
-  const result = await modlist.findOne<Modwatch.Profile>({
+  const result = await modlist.findOne<Modlist>({
     username
   });
   return result;
 }
 
-export async function getProfileFiles({ username }: { username: string }) {
+export async function getProfileFiles({ username }: { username: string }): Promise<{
+  [key in FileName]?: boolean // FileName
+}> {
   const {
     plugins,
     modlist,
     ini,
     prefsini
-  } = await (await initializeModlistCollection()).findOne<Modwatch.Profile>({
+  } = await (await initializeModlistCollection()).findOne<Modlist>({
     username
   });
   return {
@@ -66,7 +70,7 @@ export async function getProfileFiles({ username }: { username: string }) {
   };
 }
 
-export async function uploadProfile(profile: Modwatch.Profile, hash?: string) {
+export async function uploadProfile(profile: Modlist, hash?: string) {
   const modlist = await initializeModlistCollection();
   const exists = await getProfile({ username: profile.username });
   if (!exists) {
@@ -98,7 +102,7 @@ export async function uploadProfile(profile: Modwatch.Profile, hash?: string) {
   }
 }
 
-export async function searchProfiles(query, limit = 50) {
+export async function searchProfiles(query, limit = 50): Promise<Modlist[]> {
   const modlist = await initializeModlistCollection();
   return await modlist
     .find({

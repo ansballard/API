@@ -6,11 +6,13 @@ import bcrypt from "bcrypt-nodejs";
 import { promisify } from "util";
 import { getProfile } from "./database";
 
+import { FileName } from "@modwatch/types";
+
 const compareAsync = promisify(bcrypt.compare);
 const hashAsync = promisify(bcrypt.hash);
 const genSaltAsync = promisify(bcrypt.genSalt);
 
-export const supportedFiletypes: Modwatch.FileNames[] = [
+export const supportedFiletypes: FileName[] = [
   "plugins",
   "modlist",
   "ini",

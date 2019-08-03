@@ -5,12 +5,14 @@ import UrlPattern from "url-pattern";
 import { getProfile, changePass, deleteProfile } from "../database";
 import { validFiletype, getToken, usernameRegex } from "../utils";
 
+import { FileName } from "@modwatch/types";
+
 export const routes = [
   get(
     //@ts-ignore UrlPattern is allowed as a parameter to micro-router methods
     new UrlPattern("/api/user/:username/file/:filetype", usernameRegex),
     async (req: ServerRequest, res: ServerResponse) => {
-      if (!validFiletype(req.params.filetype as Modwatch.FileNames)) {
+      if (!validFiletype(req.params.filetype as FileName)) {
         send(res, 400, "Invalid Filetype");
       }
       try {
