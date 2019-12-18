@@ -21,7 +21,7 @@ const renderFileAsync = promisify(renderFile);
 const clients = [
   "https://modwat.ch",
   "https://modwatch-staging.firebaseapp.com"
-].concat(/*process.env.NODE_ENV !== "production" ? */"http://localhost:3000"/* : []*/);
+];
 
 export const routes = [
   get("/oauth/authorize", async (req: ServerRequest, res: ServerResponse) => {
@@ -43,7 +43,6 @@ export const routes = [
       }
       send(res, 200);
     } catch (e) {
-      console.log(e);
       send(res, e.httpStatus || 500, e.message || null);
     }
   }),

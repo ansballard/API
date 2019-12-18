@@ -1,8 +1,7 @@
 import { post, ServerRequest, ServerResponse } from "microrouter";
 import { send, json } from "micro";
 
-import { getProfile } from "../database";
-import { verifyToken, validPassword, generateToken } from "../utils";
+import { verifyToken, generateToken } from "../utils";
 
 export const routes = [
   post("/auth/checkToken", async (req: ServerRequest, res: ServerResponse) => {
@@ -18,8 +17,6 @@ export const routes = [
   post("/auth/signin", async (req: ServerRequest, res: ServerResponse) => {
     try {
       const body = (await json(req)) as { username: string; password: string };
-      const profile = await getProfile({ username: body.username });
-      await validPassword(body.password, profile.password);
       const token = await generateToken(body.username, body.password);
       send(res, 200, { token });
     } catch (e) {

@@ -14,6 +14,7 @@ export const routes = [
     async (req: ServerRequest, res: ServerResponse) => {
       if (!validFiletype(req.params.filetype as FileName)) {
         send(res, 400, "Invalid Filetype");
+        return;
       }
       try {
         const profile = await getProfile({

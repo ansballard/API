@@ -52,7 +52,6 @@ export function getToken(req: ServerRequest): string {
     const bearer = bearerHeader.split(" ");
     return bearer[1];
   } catch (e) {
-    console.log(e);
     throw {
       httpStatus: 401,
       message: "Invalid Token"
@@ -77,7 +76,7 @@ export async function generateToken(
       message: "Profile Not Found"
     };
   }
-  if (!(await validPassword(profile.password, password))) {
+  if (!(await validPassword(password, profile.password))) {
     throw {
       httpStatus: 401,
       message: "Invalid Login"
@@ -97,7 +96,6 @@ export function verifyToken(token: string): any {
     }
     return decoded;
   } catch (e) {
-    console.log(e);
     throw {
       httpStatus: 401,
       message: "Invalid Token"

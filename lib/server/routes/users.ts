@@ -10,7 +10,6 @@ export const routes = [
     try {
       send(res, 200, await getUsersCount());
     } catch (e) {
-      console.log(e);
       send(res, 500);
     }
   }),
@@ -33,7 +32,6 @@ export const routes = [
         });
         send(res, 200, users);
       } catch (e) {
-        console.log(e);
         send(res, 500);
       }
     }

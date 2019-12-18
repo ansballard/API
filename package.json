@@ -4,8 +4,7 @@
   "description": "Modwatch API",
   "author": {
     "name": "Aaron Ballard",
-    "email": "ans.ballard@gmail.com",
-    "url": "http://www.openshift.com/"
+    "email": "ans.ballard@gmail.com"
   },
   "scripts": {
     "start": "pm2 start server.js",
@@ -15,14 +14,8 @@
     "prettier": "prettier --write '{server.js,lib/**/*.ts}'",
     "build": "tsc && cp lib/server/oauth.ejs dist/server/"
   },
-  "homepage": "http://www.openshift.com/",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/openshift/origin-server"
-  },
   "engines": {
-    "node": ">= 6.10.0",
-    "npm": ">= 3.10.0"
+    "node": ">= 12.14.0"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -39,7 +32,7 @@
     "urlencoded-body-parser": "^2.0.1"
   },
   "devDependencies": {
-    "@modwatch/types": "^0.1.0",
+    "@modwatch/types": "^0.3.0",
     "@types/micro": "^7.3.3",
     "@types/microrouter": "^3.1.0",
     "@types/mongodb": "^3.1.22",
@@ -51,7 +44,6 @@
     "prompt": "^1.0.0",
     "typescript": "^3.4.3"
   },
-  "bundleDependencies": [],
   "private": true,
   "main": "server.js"
 }
